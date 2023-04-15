@@ -4,6 +4,7 @@ import com.ems.app.entity.Employee;
 import com.ems.app.exception.ResourceNotFoundException;
 import com.ems.app.repository.EmployeeRepository;
 import com.ems.app.service.EmployeeService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,18 +12,20 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Log4j2
 public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
     private EmployeeRepository employeeRepository;
     @Override
     public Employee saveEmployee (Employee employee){
-
+        log.info("Saving employee...");
         return employeeRepository.save(employee);
     }
 
     @Override
     public List<Employee> getAllEmployees (){
+        log.info("Find All employees");
         return employeeRepository.findAll();
     }
 
@@ -34,6 +37,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 //        }else {
 //            throw new ResourceNotFoundException("Employee","id",id);
 //        }
+        log.info("Fetching Employee by id ");
         return  employeeRepository.findById(id).orElseThrow(
                 ()-> new ResourceNotFoundException("Employee","id",id));
     }
@@ -51,7 +55,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         existingEmployee.setLastName(employee.getLastName());
         existingEmployee.setEmail(employee.getEmail());
 
-        // Saving updated details in at server side
+
+        log.info("Saving updated details in at server side");
         employeeRepository.save(existingEmployee);
         return existingEmployee;
     }
@@ -60,8 +65,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void removeEmployee (Integer id){
         // check whether the given employee id is exist or not or else throw Exception
         employeeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Employee", "id", id));
-
-        // Deleting Resource from server
+        log.info("Deleting Resource from server");
         employeeRepository.deleteById(id);
 
     }
