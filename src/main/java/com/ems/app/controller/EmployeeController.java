@@ -10,16 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-/*
-// RESTful API methods for Retrieval operations
-
-// RESTful API method for Create operation
-
-// RESTful API method for Update operation
-
-// RESTful API method for Delete operation
-*/
-
 @RestController
 @RequestMapping("/api/ems")
 public class EmployeeController {
@@ -45,6 +35,11 @@ public class EmployeeController {
     public List<Employee> getAllEmployees(){
         return employeeService.getAllEmployees();
     }
+
+
+    /* Api for CREATE EMPLOYEE
+     * URL:http://localhost:8085/api/ems/saveEmployee
+     * */
     @GetMapping("/{id}")
     public ResponseEntity<Employee> getEmployeeById(@PathVariable("id") Integer id){
 
@@ -52,6 +47,13 @@ public class EmployeeController {
 
     }
 
+    /* Api for Update EMPLOYEE
+     * URL:http://localhost:8085/api/ems/saveEmployee
+     * */
+    @PutMapping("/updateEmployee/{id}")
+    public ResponseEntity<Employee> updateEmployee(@RequestBody Employee employee,@PathVariable("id") Integer id){
+        return new ResponseEntity<Employee>(employeeService.updateEmployee(employee,id),HttpStatus.OK);
+    }
 
 
 
