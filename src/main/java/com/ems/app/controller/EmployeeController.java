@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/ems")
@@ -37,12 +36,11 @@ public class EmployeeController {
     }
 
 
-    /* Api for CREATE EMPLOYEE
+    /* Api for Get Employee By id
      * URL:http://localhost:8085/api/ems/saveEmployee
      * */
     @GetMapping("/{id}")
     public ResponseEntity<Employee> getEmployeeById(@PathVariable("id") Integer id){
-
         return new ResponseEntity<Employee>(employeeService.getEmployeeById(id),HttpStatus.OK);
 
     }
