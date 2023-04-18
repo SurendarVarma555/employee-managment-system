@@ -40,7 +40,12 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
 	<build>
 		<plugins>
@@ -60,6 +65,13 @@
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>0.8.2</version>
+				<configuration>
+					<excludes>
+						<exclude>com/ems/app/**/Employee.class</exclude>
+						<exclude>com/ems/app/**/Employee.EmployeeBuilder</exclude>
+						<exclude>com/ems/app/**/EmployeeManagementSystemApplication.class</exclude>
+					</excludes>
+				</configuration>
 				<executions>
 					<execution>
 						<goals>
